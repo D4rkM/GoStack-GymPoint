@@ -1,5 +1,3 @@
-import * as Yup from 'yup';
-
 import Student from '../models/Student';
 
 class StudentController {
@@ -31,22 +29,6 @@ class StudentController {
     }
 
     async store(req, res) {
-        const schema = Yup.object().shape({
-            name: Yup.string().required(),
-            email: Yup.string()
-                .email()
-                .required(),
-            age: Yup.string(),
-            weight: Yup.string(),
-            height: Yup.string(),
-        });
-
-        if (!(await schema.isValid(req.body))) {
-            return res.status(400).json({
-                error: 'Validation fails',
-            });
-        }
-
         const userExists = await Student.findOne({
             where: { email: req.body.email },
         });
@@ -60,23 +42,12 @@ class StudentController {
     }
 
     async update(req, res) {
-        const schema = Yup.object().shape({
-            id: Yup.string(),
-            name: Yup.string(),
-            email: Yup.string().email(),
-            age: Yup.string(),
-            weight: Yup.string(),
-            height: Yup.string(),
-        });
-
-        if (!(await schema.isValid(req.body))) {
-            return res.status(400).json({
-                error: 'Validation fails',
-            });
-        }
-
         return res.json({ status: true });
     }
+
+    // async delete(req, res) {
+
+    // }
 }
 
 export default new StudentController();
