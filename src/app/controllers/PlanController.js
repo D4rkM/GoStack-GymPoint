@@ -31,9 +31,9 @@ class PlanController {
     }
 
     async delete(req, res) {
-        const { id } = req.params;
+        const { planId } = req.params;
 
-        const plan = await Plan.findByPk(id);
+        const plan = await Plan.findByPk(planId);
 
         if (!plan) {
             return res
@@ -41,7 +41,7 @@ class PlanController {
                 .json({ message: 'This plan does not exist' });
         }
 
-        await Plan.destroy(id);
+        await Plan.destroy(planId);
 
         return res.json({ message: 'Plan deleted succesfully' });
     }
