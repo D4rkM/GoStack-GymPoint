@@ -41,7 +41,11 @@ class PlanController {
                 .json({ message: 'This plan does not exist' });
         }
 
-        await Plan.destroy(planId);
+        await Plan.destroy({
+            where: {
+                id: planId,
+            },
+        });
 
         return res.json({ message: 'Plan deleted succesfully' });
     }
