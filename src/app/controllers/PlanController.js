@@ -25,7 +25,7 @@ class PlanController {
     }
 
     async update(req, res) {
-        const { title, duration, price } = await Plan.create(req.body);
+        const { title, duration, price } = await Plan.update(req.body);
 
         return res.json({ title, duration, price });
     }

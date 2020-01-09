@@ -32,6 +32,6 @@ module.exports = {
     },
 
     down: queryInterface => {
-        return queryInterface.dropTable('students');
+        return queryInterface.dropTable('users');
     },
 };
