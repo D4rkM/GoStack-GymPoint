@@ -16,6 +16,7 @@ class EnrollmentMail {
             template: 'welcome',
             context: {
                 plan: plan.title,
+                price: enrollment.price,
                 student: student.name,
                 start_date: format(
                     parseISO(enrollment.start_date),
