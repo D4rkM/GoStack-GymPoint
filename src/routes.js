@@ -9,6 +9,8 @@ import validateSessionStore from './app/validators/SessionStore';
 import validateStudentStore from './app/validators/StudentStore';
 import validateStudentUpdate from './app/validators/StudentUpdate';
 import validatePlanStore from './app/validators/PlanStore';
+import validateEnrollmentStore from './app/validators/EnrollmentStore';
+import validateEnrollmentUpdate from './app/validators/EnrollmentUpdate';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -35,6 +37,15 @@ routes.put('/plans', PlanController.update);
 routes.delete('/plans/:planId', PlanController.delete);
 
 routes.get('/enrollments', EnrollmentController.index);
-routes.post('/enrollments', EnrollmentController.store);
+routes.post(
+    '/enrollments',
+    validateEnrollmentStore,
+    EnrollmentController.store
+);
+routes.put(
+    '/enrollments',
+    validateEnrollmentUpdate,
+    EnrollmentController.update
+);
 
 export default routes;
