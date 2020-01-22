@@ -1,4 +1,4 @@
-import { startOfWeek, endOfWeek, parseISO } from 'date-fns';
+import { startOfWeek, endOfWeek } from 'date-fns';
 import { Op } from 'sequelize';
 
 import Checkin from '../models/Checkin';
