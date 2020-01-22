@@ -9,7 +9,9 @@ import Queue from '../../lib/Queue';
 
 class EnrollmentController {
     async index(req, res) {
-        return res.json({ message: 'ok' });
+        const enrollments = await Enrollment.findAll();
+
+        return res.json({ enrollments });
     }
 
     async store(req, res) {
@@ -51,9 +53,27 @@ class EnrollmentController {
     }
 
     async update(req, res) {
-        // const { start_date } = req.body;
+        const { start_date } = req.body;
 
-        return res.json({ data: req.body });
+        return res.json({ start_date });
+    }
+
+    async delete(req, res) {
+        const { enrollmentId } = req.params;
+
+        const enrollment = await Enrollment.findByPk(enrollmentId);
+
+        if (!enrollment) {
+            return res.status(400).json({ message: 'Enrollment not found!' });
+        }
+
+        await Enrollment.destroy({
+            where: {
+                id: enrollmentId,
+            },
+        });
+
+        return res.json({ message: 'Enrollment deleted succesfully' });
     }
 }
 
